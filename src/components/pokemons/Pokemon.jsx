@@ -1,8 +1,11 @@
+import React from 'react';
+
 export function Pokemon({ pokemon }) {
-    return (
-      <div style={{ marginBottom: "1em" }}>
-        <img src={pokemon.image} alt={pokemon.name} style={{ width: "100px" }} />
-        <p>{pokemon.name}</p>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h2>{pokemon.name}</h2>
+      <img src={pokemon.image} alt={pokemon.name} />
+      <p>Type(s): {pokemon.apiTypes.map((type) => type.name).join(', ')}</p>
+    </div>
+  );
+}
