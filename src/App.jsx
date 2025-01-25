@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { PokemonList } from './components/pokemons/PokemonList';
 import { Input } from './components/forms/Input';
 import { TypeFilter } from './components/TypeFilter';
-import { POKEMONS } from './data/pokemons';
+import { usePokemons } from './hooks/usePokemons';
+import { LoadingSpinner } from './components/LoadingSpinner';
 
 function App() {
   const [searchValue, setSearchValue] = useState('');
   const [selectedTypes, setSelectedTypes] = useState([]);
+  const { pokemons, loading, error } = usePokemons();
 
-  const filteredPokemons = POKEMONS.filter((pokemon) => {
+  const filteredPokemons = pokemons.filter((pokemon) => {
     const matchesSearch = pokemon.name.toLowerCase().includes(searchValue.toLowerCase());
     const matchesTypes =
       selectedTypes.length === 0 ||
@@ -23,6 +25,9 @@ function App() {
       prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
     );
   };
+
+  if (loading) return <LoadingSpinner />;
+  if (error) return <div className="text-center text-white p-4">{error}</div>;
 
   return (
     <div className="p-4">
