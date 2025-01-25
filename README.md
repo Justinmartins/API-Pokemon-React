@@ -1,6 +1,6 @@
 
 # 🌸 Mon Pokédex - Projet React JS M1 MIAGE 🌸
-Bienvenue notre application Mon Pokédex ! C'est une application web construite avec ReactJS pour explorer l'univers des Pokémon grâce à l'API opensource PokéAPI. 🌟
+Bienvenue notre application de Pokédex ! C'est une application web construite avec ReactJS pour explorer l'univers des Pokémon avec l'API opensource PokéAPI. 🌟
 
 ### ✨ Fonctionnalités principales
 - 🌐 **Appels API et gestion des données** : 
