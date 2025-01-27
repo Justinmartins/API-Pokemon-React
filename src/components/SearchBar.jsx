@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input } from 'components/forms/Input'; 
+import { Input } from '../components/forms/Input'; 
 export function SearchBar({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState('');
 
