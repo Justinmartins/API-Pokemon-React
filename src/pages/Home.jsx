@@ -1,5 +1,5 @@
 import React from 'react';
-import { SearchBar } from '../components/SearchBar';
+import { SearchBar } from '../components/SearchBar.jsx';
 import { Gamepad } from 'lucide-react';
 
 export function Home() {
@@ -14,7 +14,7 @@ export function Home() {
           Venez découvrir tous les Pokémons et leurs caractéristiques !
         </p>
       </div>
-      <SearchBar />
+      <SearchBar/>
     </div>
   );
 }
