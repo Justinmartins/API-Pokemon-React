@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { SearchBar } from '../components/SearchBar.jsx';
 import { Gamepad } from 'lucide-react';
-import { PokemonList } from '../components/pokemons/PokemonList';
-import { usePokemons } from '../hooks/usePokemons';
 
 export function Home() {
   return (
