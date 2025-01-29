@@ -1,16 +1,17 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { ArrowLeft, Heart, Shield, Zap, Swords, Target, Activity } from 'lucide-react';
 import { usePokemons } from '../hooks/usePokemons';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 
 export function PokemonDetail() {
   const { id } = useParams();
   const { pokemons, loading, error } = usePokemons();
-
+  
   if (loading) return <LoadingSpinner />;
   if (error) return <div className="text-center text-white p-4">{error}</div>;
-
-  const pokemon = pokemons.find((p) => p.id === parseInt(id));
+  
+  const pokemon = pokemons.find(p => p.id === parseInt(id));
 
   if (!pokemon) {
     return (
@@ -20,11 +21,25 @@ export function PokemonDetail() {
     );
   }
 
+  const StatIcon = ({ stat }) => {
+    const icons = {
+      HP: <Heart className="w-5 h-5" />,
+      attack: <Swords className="w-5 h-5" />,
+      defense: <Shield className="w-5 h-5" />,
+      special_attack: <Target className="w-5 h-5" />,
+      special_defense: <Shield className="w-5 h-5" />,
+      speed: <Zap className="w-5 h-5" />
+    };
+    return icons[stat] || <Activity className="w-5 h-5" />;
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <Link to="/" className="inline-flex items-center text-white hover:text-gray-200 mb-6">
-        <span className="mr-2">←</span> Retour à la liste
+        <ArrowLeft className="w-5 h-5 mr-2" />
+        Retour à la liste
       </Link>
+      
       <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
         <div className="relative p-8 bg-gradient-to-br from-gray-100 to-gray-200">
           <img
@@ -36,8 +51,10 @@ export function PokemonDetail() {
             #{String(pokemon.pokedexId).padStart(3, '0')}
           </span>
         </div>
+        
         <div className="p-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">{pokemon.name}</h1>
+          
           <div className="flex flex-wrap gap-2 mb-8">
             {pokemon.apiTypes.map((type, index) => (
               <span
@@ -49,10 +66,12 @@ export function PokemonDetail() {
               </span>
             ))}
           </div>
+          
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             {Object.entries(pokemon.stats).map(([stat, value]) => (
               <div key={stat} className="bg-gray-50 rounded-xl p-4">
                 <div className="flex items-center gap-2 text-gray-600 mb-2">
+                  <StatIcon stat={stat} />
                   <span className="font-medium">{formatStatName(stat)}</span>
                 </div>
                 <div className="text-3xl font-bold text-gray-900">{value}</div>
@@ -65,6 +84,7 @@ export function PokemonDetail() {
               </div>
             ))}
           </div>
+          
           {pokemon.apiEvolutions?.length > 0 && (
             <div className="mt-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Évolutions</h2>
@@ -90,7 +110,7 @@ function formatStatName(stat) {
     defense: 'Défense',
     special_attack: 'Attaque Spé.',
     special_defense: 'Défense Spé.',
-    speed: 'Vitesse',
+    speed: 'Vitesse'
   };
   return translations[stat] || stat;
 }
@@ -114,7 +134,7 @@ function getTypeColor(type) {
     Glace: '#98D8D8',
     Dragon: '#7038F8',
     Ténèbres: '#705848',
-    Fée: '#EE99AC',
+    Fée: '#EE99AC'
   };
   return colors[type] || '#777777';
 }

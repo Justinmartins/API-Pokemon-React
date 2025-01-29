@@ -1,5 +1,7 @@
 import React from 'react';
 
+import React from 'react';
+
 export function CheckBox({ checked, onChange, label, image }) {
   return (
     <label className="flex items-center p-2 cursor-pointer hover:bg-gray-50 rounded-lg transition-colors">

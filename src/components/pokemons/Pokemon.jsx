@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export function Pokemon({ pokemon }) {
   return (
     <Link to={`/pokemon/${pokemon.id}`} className="block transform hover:scale-105 transition-transform duration-300">
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl">
+      <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
         <div className="relative p-4 bg-gradient-to-br from-gray-100 to-gray-200">
           <img
             src={pokemon.image}
@@ -21,8 +21,10 @@ export function Pokemon({ pokemon }) {
             {pokemon.apiTypes.map((type, index) => (
               <span
                 key={index}
-                className="px-3 py-1 text-sm font-semibold text-white rounded-full shadow-md"
-                style={{ backgroundColor: getTypeColor(type.name) }}
+                className="px-3 py-1 text-sm font-semibold text-white rounded-full"
+                style={{
+                  backgroundColor: getTypeColor(type.name)
+                }}
               >
                 {type.name}
               </span>
@@ -53,7 +55,7 @@ function getTypeColor(type) {
     Glace: '#98D8D8',
     Dragon: '#7038F8',
     Ténèbres: '#705848',
-    Fée: '#EE99AC',
+    Fée: '#EE99AC'
   };
   return colors[type] || '#777777';
 }

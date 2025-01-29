@@ -2,19 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
 .shadow-text {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 @keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
 }
 
 .hover-bounce:hover {
   animation: bounce 0.5s infinite;
+}
+
+.search-input {
+  @apply w-full pl-10 pr-4 py-3 text-gray-900 bg-white/90 backdrop-blur-sm border border-pink-200 rounded-lg 
+  focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent placeholder-gray-400 shadow-sm
+  transition-all duration-300;
+}
+
+.pokemon-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4;
 }
