@@ -1,18 +1,27 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft, Heart, Shield, Zap, Swords, Target, Activity } from 'lucide-react';
-import { usePokemons } from '../hooks/usePokemons';
 import { LoadingSpinner } from '../components/LoadingSpinner';
+
+const fetchPokemonById = async (id) => {
+  const response = await fetch(`https://pokebuildapi.fr/api/v1/pokemon/${id}`);
+  if (!response.ok) {
+    throw new Error("Échec du chargement des données du Pokémon");
+  }
+  return response.json();
+};
 
 export function PokemonDetail() {
   const { id } = useParams();
-  const { pokemons, loading, error } = usePokemons();
-  
-  if (loading) return <LoadingSpinner />;
-  if (error) return <div className="text-center text-white p-4">{error}</div>;
-  
-  const pokemon = pokemons.find(p => p.id === parseInt(id));
+  const { data: pokemon, error, isLoading } = useQuery({
+    queryKey: ['pokemon', id],
+    queryFn: () => fetchPokemonById(id),
+    staleTime: 1000 * 60 * 5, // 5 minutes de cache
+  });
 
+  if (isLoading) return <LoadingSpinner />;
+  if (error) return <div className="text-center text-white p-4">{error.message}</div>;
   if (!pokemon) {
     return (
       <div className="container mx-auto px-4 py-8 text-center text-white">
