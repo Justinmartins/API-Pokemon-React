@@ -8,7 +8,7 @@ import { usePokemons } from '../hooks/usePokemons';
 export function SearchBar() {
   const [searchValue, setSearchValue] = useState("");
   const [selectedTypes, setSelectedTypes] = useState([]);
-  const { pokemons, loading, error } = usePokemons();
+  const { pokemons, isLoading, error } = usePokemons(); // Utilisation du hook modifié
 
   const filteredPokemons = useMemo(() => {
     return pokemons.filter((pokemon) => {
@@ -30,7 +30,7 @@ export function SearchBar() {
     );
   };
 
-  if (loading) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSpinner />; // Changement de `loading` en `isLoading`
   if (error) return <div className="text-center text-white p-4 shadow-text">{error}</div>;
 
   return (

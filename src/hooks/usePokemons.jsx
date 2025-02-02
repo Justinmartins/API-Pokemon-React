@@ -1,25 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 export function usePokemons() {
-  const [pokemons, setPokemons] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchPokemons = async () => {
-      try {
-        const response = await fetch('https://pokebuildapi.fr/api/v1/pokemon');
-        const data = await response.json();
-        setPokemons(data);
-        setLoading(false);
-      } catch (err) {
-        setError("il y a eu une erreur lors du chargement des Pokémon");
-        setLoading(false);
+  const { data: pokemons = [], isLoading: loading, error } = useQuery({
+    queryKey: ['pokemons'],
+    queryFn: async () => {
+      const response = await fetch('https://pokebuildapi.fr/api/v1/pokemon');
+      if (!response.ok) {
+        throw new Error("il y a eu une erreur lors du chargement des Pokémon");
       }
-    };
-
-    fetchPokemons();
-  }, []);
+      return response.json();
+    },
+  });
 
   return { pokemons, loading, error };
 }
