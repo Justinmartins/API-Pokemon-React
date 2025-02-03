@@ -13,16 +13,16 @@ React-router pour la navigation entre les pages.
 
 - ⚛️ **Utilisation des Hooks React** : 
 
-useState : Pour la gestion des états (liste des Pokémon, recherche, etc.).
+useState() : Pour la gestion des états (liste des Pokémon, recherche, etc.).
 
 
-useEffect : Pour les appels API lors du montage des composants.
+useEffect(), useQuery() : Pour les appels API lors du montage des composants.
 
 
-useMemo : Pour l'optimisation de nos calculs de filtrage des Pokémon.
+useMemo() : Pour l'optimisation de nos calculs de filtrage des Pokémon.
 
 
-useParams : Pour le changement dynamique des id pour les pages détail
+useParams() : Pour le changement dynamique des id pour les pages détail de Pokémons. 
 
 - 🖥️ **Composants et Navigation sur notre site** : 
 
