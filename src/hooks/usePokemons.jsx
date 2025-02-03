@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 export function usePokemons() {
-  const { data: pokemons = [], isLoading: loading, error } = useQuery({
+  const { data: pokemons = [], error, isLoading} = useQuery({
     queryKey: ['pokemons'],
     queryFn: async () => {
       const response = await fetch('https://pokebuildapi.fr/api/v1/pokemon');
@@ -11,6 +11,5 @@ export function usePokemons() {
       return response.json();
     },
   });
-
-  return { pokemons, loading, error };
+  return { pokemons, isLoading, error };
 }

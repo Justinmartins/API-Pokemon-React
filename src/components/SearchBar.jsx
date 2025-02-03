@@ -8,8 +8,7 @@ import { usePokemons } from '../hooks/usePokemons';
 export function SearchBar() {
   const [searchValue, setSearchValue] = useState("");
   const [selectedTypes, setSelectedTypes] = useState([]);
-  const { pokemons, isLoading, error } = usePokemons(); // Utilisation du hook modifié
-
+  const { pokemons, isLoading, error } = usePokemons();
   const filteredPokemons = useMemo(() => {
     return pokemons.filter((pokemon) => {
       const matchesSearch = pokemon.name.toLowerCase().includes(searchValue.toLowerCase());
